@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>客户信息登记表</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 30px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .success {
+      color: green;
+      text-align: center;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>📋 客户信息登记表</h2>
+  <div class="success" id="successMessage">提交成功！我们将尽快给您报价。</div>
+  <form id="quoteForm">
+    <input type="text" name="name" placeholder="姓名或公司名称" required>
+    <input type="text" name="contact" placeholder="联系方式（WhatsApp/邮箱）" required>
+    <input type="text" name="country" placeholder="国家" required>
+    <input type="text" name="product" placeholder="感兴趣的产品（热卷/镀锌/彩涂）">
+    <textarea name="details" placeholder="具体需求（如规格、数量等）" rows="5"></textarea>
+    <button type="submit">提交</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('quoteForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+    console.log('提交内容：', data);
+    document.getElementById('quoteForm').style.display = 'none';
+    document.getElementById('successMessage').style.display = 'block';
+    // 这里可以连接后端，例如发送到 Google Sheet 或服务器保存
+  });
+</script>
+
+</body>
+</html>
