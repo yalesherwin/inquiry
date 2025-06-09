@@ -1,79 +1,226 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>客户信息登记表</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steel Inquiry Form / 钢铁产品询盘表单</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --main: #2541b2;
+      --accent: #e9eafd;
+      --card: #fff;
+      --shadow: 0 6px 28px 0 rgba(44,62,80,.12);
+      --radius: 18px;
+      --font: 'Roboto', '微软雅黑', Arial, sans-serif;
+    }
     body {
-      font-family: sans-serif;
-      background: #f5f5f5;
-      padding: 40px;
+      background: linear-gradient(135deg, #e9eafd 0%, #f7faff 100%);
+      min-height: 100vh;
+      font-family: var(--font);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 30px;
+    .inquiry-wrap {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 440px;
+      padding: 36px 28px 28px 28px;
+      margin: 24px;
+      position: relative;
     }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #007bff;
-      color: white;
+    .lang-switch {
+      position: absolute;
+      right: 24px;
+      top: 16px;
+      font-size: 15px;
+      background: #e9eafd;
+      color: #2541b2;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
+      border-radius: 8px;
+      padding: 2px 14px;
       cursor: pointer;
+      outline: none;
+      font-family: var(--font);
+      transition: background .18s;
     }
-    .success {
-      color: green;
+    .lang-switch:hover { background: #d4dcff; }
+    .inquiry-wrap h2 {
+      margin-top: 0;
+      color: #2541b2;
       text-align: center;
-      font-weight: bold;
-      display: none;
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; margin-bottom: 6px;
+      color: #2541b2; font-size: 15px; font-weight: 500;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%; font-size: 15px;
+      border: 1px solid #c7d0ed;
+      border-radius: 8px;
+      padding: 9px 11px;
+      background: #f7faff;
+      outline: none;
+      box-sizing: border-box;
+      transition: border .2s;
+      font-family: var(--font);
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: #2541b2;
+      background: #f0f4ff;
+    }
+    .submit-btn {
+      background: linear-gradient(90deg, #2541b2, #3867d6);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 13px 0;
+      width: 100%;
+      font-size: 17px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      font-family: var(--font);
+      margin-top: 6px;
+      font-weight: 500;
+      transition: background .18s;
+    }
+    .submit-btn:disabled { background: #adb7d8; cursor: not-allowed;}
+    .form-tip {
+      color: #888;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 16px;
+    }
+    .success-message, .fail-message {
+      text-align: center; margin-top: 18px; font-size: 16px; font-weight: 500;
+    }
+    .success-message { color: #22b14c; }
+    .fail-message { color: #e74c3c; }
+    @media (max-width:600px){
+      .inquiry-wrap { max-width:98vw; padding:18px 5vw 22px 5vw; }
+      .lang-switch { right:10px; top:8px; font-size:13px; }
     }
   </style>
 </head>
 <body>
+  <div class="inquiry-wrap">
+    <button type="button" class="lang-switch" id="langBtn">EN</button>
+    <h2 id="formTitle">钢铁产品询盘</h2>
+    <form id="inquiryForm" autocomplete="off">
+      <div class="form-group">
+        <label id="labelName">您的姓名</label>
+        <input name="name" required placeholder="请输入您的姓名 / Your Name">
+      </div>
+      <div class="form-group">
+        <label id="labelCompany">公司名称</label>
+        <input name="company" placeholder="（选填）公司/工厂/贸易公司 / Company (optional)">
+      </div>
+      <div class="form-group">
+        <label id="labelEmail">邮箱</label>
+        <input name="email" required type="email" placeholder="请填写有效邮箱 / Email">
+      </div>
+      <div class="form-group">
+        <label id="labelPhone">联系电话</label>
+        <input name="phone" required placeholder="手机号或WhatsApp / Phone or WhatsApp">
+      </div>
+      <div class="form-group">
+        <label id="labelProduct">采购产品</label>
+        <input name="product" required placeholder="如：热轧卷、镀锌卷、彩涂卷 / e.g. HR Coil, GI Coil, PPGI">
+      </div>
+      <div class="form-group">
+        <label id="labelSpec">规格和数量</label>
+        <textarea name="spec" required rows="3" placeholder="请输入详细规格、吨数、特殊要求 / Specifications, Qty, Requirements"></textarea>
+      </div>
+      <div class="form-group">
+        <label id="labelPort">目的港（国家/城市）</label>
+        <input name="port" required placeholder="如：阿尔及利亚阿尔及尔港 / e.g. Algiers, Algeria">
+      </div>
+      <div class="form-group">
+        <label id="labelRemark">备注</label>
+        <textarea name="remark" rows="2" placeholder="其他要求或补充信息 / Other remarks"></textarea>
+      </div>
+      <button type="submit" class="submit-btn" id="submitBtn">提交询盘</button>
+      <div class="form-tip" id="tipMsg">
+        我们会在1个工作日内联系您，信息将严格保密 / We'll contact you within 1 working day. Info kept confidential.
+      </div>
+      <div id="msg"></div>
+    </form>
+  </div>
+  <script>
+    // 语言切换
+    const langMap = {
+      zh: {
+        formTitle: "钢铁产品询盘",
+        labelName: "您的姓名",
+        labelCompany: "公司名称",
+        labelEmail: "邮箱",
+        labelPhone: "联系电话",
+        labelProduct: "采购产品",
+        labelSpec: "规格和数量",
+        labelPort: "目的港（国家/城市）",
+        labelRemark: "备注",
+        submitBtn: "提交询盘",
+        tipMsg: "我们会在1个工作日内联系您，信息将严格保密 / We'll contact you within 1 working day. Info kept confidential.",
+        langBtn: "EN"
+      },
+      en: {
+        formTitle: "Steel Inquiry Form",
+        labelName: "Your Name",
+        labelCompany: "Company",
+        labelEmail: "Email",
+        labelPhone: "Phone / WhatsApp",
+        labelProduct: "Product",
+        labelSpec: "Specs & Quantity",
+        labelPort: "Destination Port (Country/City)",
+        labelRemark: "Remarks",
+        submitBtn: "Submit Inquiry",
+        tipMsg: "We'll contact you within 1 working day. Info kept confidential. / 我们会在1个工作日内联系您，信息将严格保密。",
+        langBtn: "中"
+      }
+    };
+    let lang = 'zh';
+    const setLang = l => {
+      lang = l;
+      for (const key in langMap[lang]) {
+        const el = document.getElementById(key);
+        if (el) el.textContent = langMap[lang][key];
+      }
+      document.getElementById('langBtn').textContent = langMap[lang].langBtn;
+    }
+    document.getElementById('langBtn').onclick = () => setLang(lang === 'zh' ? 'en' : 'zh');
+    setLang('zh');
 
-<div class="container">
-  <h2>📋 客户信息登记表</h2>
-  <div class="success" id="successMessage">提交成功！我们将尽快给您报价。</div>
-  <form id="quoteForm">
-    <input type="text" name="name" placeholder="姓名或公司名称" required>
-    <input type="text" name="contact" placeholder="联系方式（WhatsApp/邮箱）" required>
-    <input type="text" name="country" placeholder="国家" required>
-    <input type="text" name="product" placeholder="感兴趣的产品（热卷/镀锌/彩涂）">
-    <textarea name="details" placeholder="具体需求（如规格、数量等）" rows="5"></textarea>
-    <button type="submit">提交</button>
-  </form>
-</div>
-
-<script>
-  document.getElementById('quoteForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData.entries());
-    console.log('提交内容：', data);
-    document.getElementById('quoteForm').style.display = 'none';
-    document.getElementById('successMessage').style.display = 'block';
-    // 这里可以连接后端，例如发送到 Google Sheet 或服务器保存
-  });
-</script>
-
+    // 表单提交
+    document.getElementById('inquiryForm').onsubmit = async function(e){
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this));
+      // 替换成你的 Zapier Webhook 地址 ↓↓↓
+      const webhookUrl = "https://hooks.zapier.com/hooks/catch/这里替换你的webhook地址/";
+      document.getElementById('submitBtn').disabled = true;
+      document.getElementById('msg').innerHTML = '';
+      try {
+        let res = await fetch(webhookUrl, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(data)
+        });
+        if(res.ok){
+          document.getElementById('msg').innerHTML = `<div class="success-message">${lang === 'zh' ? '提交成功！我们会尽快与您联系。' : 'Submitted! We will contact you soon.'}</div>`;
+          this.reset();
+        }else{
+          throw new Error('提交失败');
+        }
+      }catch(e){
+        document.getElementById('msg').innerHTML = `<div class="fail-message">${lang === 'zh' ? '提交失败，请稍后重试。' : 'Failed. Please try again later.'}</div>`;
+      }
+      document.getElementById('submitBtn').disabled = false;
+    }
+  </script>
 </body>
 </html>
