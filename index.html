@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Steel Inquiry Form / 钢铁产品询盘表单</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHINACNU STEEL - Inquiry Form</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --main: #2541b2;
-      --accent: #e9eafd;
+      --main: #1a2b50;
+      --accent: #eef2f9;
       --card: #fff;
-      --shadow: 0 6px 28px 0 rgba(44,62,80,.12);
+      --shadow: 0 8px 28px rgba(30, 50, 80, 0.2);
       --radius: 18px;
       --font: 'Roboto', '微软雅黑', Arial, sans-serif;
     }
     body {
-      background: linear-gradient(135deg, #e9eafd 0%, #f7faff 100%);
-      min-height: 100vh;
+      background: linear-gradient(145deg, #d9e2f1 0%, #f1f4f9 100%);
       font-family: var(--font);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -26,134 +26,165 @@
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      max-width: 440px;
-      padding: 36px 28px 28px 28px;
-      margin: 24px;
+      max-width: 480px;
+      width: 100%;
+      padding: 36px 32px;
+      margin: 20px;
       position: relative;
+    }
+    .brand-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .brand-header img {
+      height: 48px;
+      margin-bottom: 10px;
+    }
+    .brand-header h1 {
+      font-size: 22px;
+      color: var(--main);
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin: 0;
     }
     .lang-switch {
       position: absolute;
-      right: 24px;
-      top: 16px;
-      font-size: 15px;
-      background: #e9eafd;
-      color: #2541b2;
+      right: 20px;
+      top: 18px;
+      font-size: 14px;
+      background: var(--accent);
+      color: var(--main);
       border: none;
       border-radius: 8px;
-      padding: 2px 14px;
+      padding: 4px 12px;
       cursor: pointer;
-      outline: none;
       font-family: var(--font);
-      transition: background .18s;
     }
-    .lang-switch:hover { background: #d4dcff; }
     .inquiry-wrap h2 {
       margin-top: 0;
-      color: #2541b2;
+      color: var(--main);
       text-align: center;
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 500;
-      letter-spacing: 2px;
     }
-    .form-group { margin-bottom: 18px; }
+    .form-group {
+      margin-bottom: 18px;
+    }
     .form-group label {
-      display: block; margin-bottom: 6px;
-      color: #2541b2; font-size: 15px; font-weight: 500;
+      display: block;
+      margin-bottom: 6px;
+      color: var(--main);
+      font-size: 15px;
+      font-weight: 500;
     }
-    .form-group input, .form-group textarea {
-      width: 100%; font-size: 15px;
-      border: 1px solid #c7d0ed;
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      font-size: 15px;
+      border: 1px solid #c0c8db;
       border-radius: 8px;
-      padding: 9px 11px;
-      background: #f7faff;
-      outline: none;
-      box-sizing: border-box;
-      transition: border .2s;
+      padding: 10px;
+      background: #f9fbff;
       font-family: var(--font);
+      transition: border 0.2s;
     }
-    .form-group input:focus, .form-group textarea:focus {
-      border-color: #2541b2;
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--main);
       background: #f0f4ff;
+      outline: none;
     }
     .submit-btn {
-      background: linear-gradient(90deg, #2541b2, #3867d6);
-      color: #fff;
+      background: linear-gradient(to right, #1a2b50, #375aab);
+      color: white;
       border: none;
       border-radius: 8px;
-      padding: 13px 0;
-      width: 100%;
+      padding: 13px;
       font-size: 17px;
-      letter-spacing: 1px;
+      width: 100%;
+      font-weight: 600;
       cursor: pointer;
-      font-family: var(--font);
-      margin-top: 6px;
-      font-weight: 500;
-      transition: background .18s;
+      transition: background 0.2s;
     }
-    .submit-btn:disabled { background: #adb7d8; cursor: not-allowed;}
+    .submit-btn:disabled {
+      background: #9aa3bb;
+      cursor: not-allowed;
+    }
     .form-tip {
-      color: #888;
+      color: #666;
       font-size: 13px;
       text-align: center;
       margin-top: 16px;
     }
     .success-message, .fail-message {
-      text-align: center; margin-top: 18px; font-size: 16px; font-weight: 500;
+      text-align: center;
+      margin-top: 18px;
+      font-size: 16px;
+      font-weight: 500;
     }
-    .success-message { color: #22b14c; }
+    .success-message { color: #27ae60; }
     .fail-message { color: #e74c3c; }
     @media (max-width:600px){
-      .inquiry-wrap { max-width:98vw; padding:18px 5vw 22px 5vw; }
-      .lang-switch { right:10px; top:8px; font-size:13px; }
+      .inquiry-wrap {
+        max-width: 95vw;
+        padding: 24px 16px;
+      }
+      .brand-header h1 {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="inquiry-wrap">
-    <button type="button" class="lang-switch" id="langBtn">EN</button>
-    <h2 id="formTitle">钢铁产品询盘</h2>
+    <div class="brand-header">
+      <img src="https://chinacnu.com/logo.png" alt="CHINACNU Steel Logo" onerror="this.style.display='none';">
+      <h1>CHINACNU STEEL</h1>
+    </div>
+    <button type="button" class="lang-switch" id="langBtn">中</button>
+    <h2 id="formTitle">Steel Inquiry Form</h2>
     <form id="inquiryForm" autocomplete="off">
       <div class="form-group">
-        <label id="labelName">您的姓名</label>
-        <input name="name" required placeholder="请输入您的姓名 / Your Name">
+        <label id="labelName">Your Name</label>
+        <input name="name" required placeholder="Your full name">
       </div>
       <div class="form-group">
-        <label id="labelCompany">公司名称</label>
-        <input name="company" placeholder="（选填）公司/工厂/贸易公司 / Company (optional)">
+        <label id="labelCompany">Company</label>
+        <input name="company" placeholder="Company or Factory (optional)">
       </div>
       <div class="form-group">
-        <label id="labelEmail">邮箱</label>
-        <input name="email" required type="email" placeholder="请填写有效邮箱 / Email">
+        <label id="labelEmail">Email</label>
+        <input name="email" required type="email" placeholder="Valid email">
       </div>
       <div class="form-group">
-        <label id="labelPhone">联系电话</label>
-        <input name="phone" required placeholder="手机号或WhatsApp / Phone or WhatsApp">
+        <label id="labelPhone">Phone / WhatsApp</label>
+        <input name="phone" required placeholder="Phone number or WhatsApp">
       </div>
       <div class="form-group">
-        <label id="labelProduct">采购产品</label>
-        <input name="product" required placeholder="如：热轧卷、镀锌卷、彩涂卷 / e.g. HR Coil, GI Coil, PPGI">
+        <label id="labelProduct">Product</label>
+        <input name="product" required placeholder="e.g. HR Coil, GI Coil, PPGI">
       </div>
       <div class="form-group">
-        <label id="labelSpec">规格和数量</label>
-        <textarea name="spec" required rows="3" placeholder="请输入详细规格、吨数、特殊要求 / Specifications, Qty, Requirements"></textarea>
+        <label id="labelSpec">Specs & Quantity</label>
+        <textarea name="spec" required rows="3" placeholder="Enter detailed specifications, tonnage, special requirements"></textarea>
       </div>
       <div class="form-group">
-        <label id="labelPort">目的港（国家/城市）</label>
-        <input name="port" required placeholder="如：阿尔及利亚阿尔及尔港 / e.g. Algiers, Algeria">
+        <label id="labelPort">Destination Port (Country/City)</label>
+        <input name="port" required placeholder="e.g. Algiers, Algeria">
       </div>
       <div class="form-group">
-        <label id="labelRemark">备注</label>
-        <textarea name="remark" rows="2" placeholder="其他要求或补充信息 / Other remarks"></textarea>
+        <label id="labelRemark">Remarks</label>
+        <textarea name="remark" rows="2" placeholder="Other remarks or special notes"></textarea>
       </div>
-      <button type="submit" class="submit-btn" id="submitBtn">提交询盘</button>
+      <button type="submit" class="submit-btn" id="submitBtn">Submit Inquiry</button>
       <div class="form-tip" id="tipMsg">
-        我们会在1个工作日内联系您，信息将严格保密 / We'll contact you within 1 working day. Info kept confidential.
+        We'll contact you within 1 working day. Info kept confidential. / 我们会在1个工作日内联系您，信息将严格保密。
       </div>
       <div id="msg"></div>
     </form>
   </div>
+
   <script>
-    // 语言切换
     const langMap = {
       zh: {
         formTitle: "钢铁产品询盘",
@@ -184,7 +215,8 @@
         langBtn: "中"
       }
     };
-    let lang = 'zh';
+
+    let lang = 'en'; // 默认英文版本
     const setLang = l => {
       lang = l;
       for (const key in langMap[lang]) {
@@ -192,15 +224,13 @@
         if (el) el.textContent = langMap[lang][key];
       }
       document.getElementById('langBtn').textContent = langMap[lang].langBtn;
-    }
+    };
     document.getElementById('langBtn').onclick = () => setLang(lang === 'zh' ? 'en' : 'zh');
-    setLang('zh');
+    setLang('en'); // 初始语言设为英文
 
-    // 表单提交
     document.getElementById('inquiryForm').onsubmit = async function(e){
       e.preventDefault();
       const data = Object.fromEntries(new FormData(this));
-      // 替换成你的 Zapier Webhook 地址 ↓↓↓
       const webhookUrl = "https://inquiry.head-6c9.workers.dev/";
       document.getElementById('submitBtn').disabled = true;
       document.getElementById('msg').innerHTML = '';
@@ -213,14 +243,15 @@
         if(res.ok){
           document.getElementById('msg').innerHTML = `<div class="success-message">${lang === 'zh' ? '提交成功！我们会尽快与您联系。' : 'Submitted! We will contact you soon.'}</div>`;
           this.reset();
-        }else{
-          throw new Error('提交失败');
+        } else {
+          throw new Error();
         }
-      }catch(e){
+      } catch(e) {
         document.getElementById('msg').innerHTML = `<div class="fail-message">${lang === 'zh' ? '提交失败，请稍后重试。' : 'Failed. Please try again later.'}</div>`;
       }
       document.getElementById('submitBtn').disabled = false;
-    }
+    };
   </script>
 </body>
 </html>
+
